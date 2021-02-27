@@ -12,19 +12,20 @@ namespace warehouseManagementSystemAPI.Controllers
     [Route("[controller]")]
     public class MMsController : ControllerBase
     {
-            private readonly IMediator mediator;
+        private readonly IMediator mediator;
 
-            public MMsController(IMediator mediator)
-            {
-                this.mediator = mediator;
-            }
+        public MMsController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
 
-            [HttpGet]
-            [Route("")]
-            public async Task<IActionResult> GetAllMMs([FromQuery] GetMMsRequest request)
-            {
-                var response = await this.mediator.Send(request);
-                return this.Ok(response);
-            }
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetAllMMs([FromQuery] GetMMsRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
         }
     }
+
+}
