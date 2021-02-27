@@ -44,5 +44,15 @@ namespace warehouseManagementSystemAPI.Controllers
             return this.Ok(response);
         }
 
+        //[HttpGet]
+        //[Route("{itemId}")]
+        //public async Task<IActionResult> GetItemById([FromQuery] GetItemByIdRequest request)
+        //{
+        //    var response = await this.mediator.Send(request);
+        //    return this.Ok(response);
+        //}
+
+
+
     }
 }

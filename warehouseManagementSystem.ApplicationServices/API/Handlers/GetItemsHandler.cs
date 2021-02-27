@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
-using warehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using warehouseManagementSystem.DataAcces;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Handlers
@@ -33,7 +32,6 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
                 MMs = n.MMs,
                 Places = n.Places,
                 Warehouses = n.Warehouses
-                
             });
 
             var response = new GetItemsResponse()

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Domain
 {
-    public class GetItemsRequest : IRequest<GetItemsResponse>
+    public class GetMMsRequest : IRequest<GetMMsResponse>
     {
-    } 
-    
+    }
 }
