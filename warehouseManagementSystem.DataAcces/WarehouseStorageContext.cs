@@ -8,13 +8,17 @@ using warehouseManagementSystem.DataAcces.Entities;
 
 namespace warehouseManagementSystem.DataAcces
 {
-    class WarehouseStorageContext : DbContext
+    public class WarehouseStorageContext : DbContext
     {
-        public WarehouseStorageContext(DbContextOptions options) : base(options)
+        public WarehouseStorageContext(DbContextOptions<WarehouseStorageContext> options) : base(options)
         {
         }
 
         public DbSet<Item> Items { get; set; }
+        public DbSet<PZ> PZs { get; set; }
+        public DbSet<WZ> WZs { get; set; }
+        public DbSet<MM> MMs { get; set; }
+        public DbSet<Place> Places { get; set; }
 
     }
 

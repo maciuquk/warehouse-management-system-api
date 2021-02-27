@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouseManagementSystemAPI", "warehouseManagementSystemAPI\warehouseManagementSystemAPI.csproj", "{DE74D255-C2A1-4E0E-80D4-90FA60596E0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "warehouseManagementSystem.DataAcces", "warehouseManagementSystem.DataAcces\warehouseManagementSystem.DataAcces.csproj", "{686C0897-04AD-4C24-9C72-D98C98A6AB66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouseManagementSystem.DataAcces", "warehouseManagementSystem.DataAcces\warehouseManagementSystem.DataAcces.csproj", "{686C0897-04AD-4C24-9C72-D98C98A6AB66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "warehouseManagementSystem.ApplicationServices", "warehouseManagementSystem.ApplicationServices\warehouseManagementSystem.ApplicationServices.csproj", "{7F25CA53-0B14-432C-B485-6D7EA0DAA9EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{686C0897-04AD-4C24-9C72-D98C98A6AB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{686C0897-04AD-4C24-9C72-D98C98A6AB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{686C0897-04AD-4C24-9C72-D98C98A6AB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F25CA53-0B14-432C-B485-6D7EA0DAA9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F25CA53-0B14-432C-B485-6D7EA0DAA9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F25CA53-0B14-432C-B485-6D7EA0DAA9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F25CA53-0B14-432C-B485-6D7EA0DAA9EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

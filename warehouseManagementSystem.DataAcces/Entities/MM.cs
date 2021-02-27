@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace warehouseManagementSystem.DataAcces.Entities
 {
-    public class ReceptionOfGoods
+   public class MM : DocumentBase
     {
-        public int Id { get; set; }
-        public string Number { get; set; }
-        public DateTime Date { get; set; }
-
     }
 }

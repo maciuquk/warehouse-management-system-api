@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace warehouseManagementSystem.DataAcces.Entities
 {
-    class InterBranchTransfer
+    public abstract class DocumentBase : EntityBase
     {
+        public string Number { get; set; }
+        public DateTime Date { get; set; }
+        public List<Item> Items { get; set; }
+
     }
 }
