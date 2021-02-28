@@ -26,9 +26,9 @@ namespace warehouseManagementSystemAPI.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
-
-
     }
+
+    
 }
 
 

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +14,21 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
     public class GetPlacesHandler : IRequestHandler<GetPlacesRequest, GetPlacesResponse>
     {
         private readonly IRepository<DataAcces.Entities.Place> PlacesRepository;
-        public GetPlacesHandler (IRepository<DataAcces.Entities.Place> PlacesRepository)
+        private readonly IMapper mapper;
+
+        public GetPlacesHandler (IRepository<DataAcces.Entities.Place> PlacesRepository, IMapper mapper)
         {
             this.PlacesRepository = PlacesRepository;
+            this.mapper = mapper;
         }
         public Task<GetPlacesResponse> Handle(GetPlacesRequest request, CancellationToken cancellationToken)
         {
             var places = this.PlacesRepository.GetAll();
-            var domainPlaces = places.Select(n => new Domain.Models.Place()
-            {
-                Id = n.Id,
-                PositionX = n.PositionX,
-                PositionY = n.PositionY,
-                MaxCapacity = n.MaxCapacity,
-                CurrentOccupied = n.CurrentOccupied,
-                Items = n.Items
-            });
+            var mappedPlaces = this.mapper.Map<List<Domain.Models.Place>>(places);
 
             var response = new GetPlacesResponse()
             {
-                Data = domainPlaces.ToList()
+                Data = mappedPlaces.ToList()
             };
             return Task.FromResult(response);
         }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,23 +15,21 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
     public class GetWarehouseHandler : IRequestHandler<GetWarehouseRequest, GetWarehouseResponse>
     {
         private readonly IRepository<DataAcces.Entities.Warehouse> WarehouseRepository;
-        public GetWarehouseHandler(IRepository<DataAcces.Entities.Warehouse> WarehouseRepository)
+        private readonly IMapper mapper;
+
+        public GetWarehouseHandler(IRepository<DataAcces.Entities.Warehouse> WarehouseRepository, IMapper mapper)
         {
             this.WarehouseRepository = WarehouseRepository;
+            this.mapper = mapper;
         }
         public Task<GetWarehouseResponse> Handle(GetWarehouseRequest request, CancellationToken cancellationToken)
         {
             var warehouses = this.WarehouseRepository.GetAll();
-            var domainWarehouses = warehouses.Select(n => new Domain.Models.Warehouse()
-            {
-                Id = n.Id,
-                Name = n.Name,
-                Items = n.Items
-            });
+            var mappedWarehouses = this.mapper.Map<List<Domain.Models.Warehouse>>(warehouses);
 
             var response = new GetWarehouseResponse()
             {
-                Data = domainWarehouses.ToList()
+                Data = mappedWarehouses.ToList()
             };
             return Task.FromResult(response);
         }

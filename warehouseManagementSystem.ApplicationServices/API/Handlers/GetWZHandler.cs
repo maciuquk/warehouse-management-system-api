@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,25 +17,21 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
     public class GetWZHandler : IRequestHandler<GetWZRequest, GetWZResponse>
     {
         private readonly IRepository<DataAcces.Entities.WZ> WZRepository;
-        public GetWZHandler(IRepository<DataAcces.Entities.WZ> WZRepository)
+        private readonly IMapper mapper;
+
+        public GetWZHandler(IRepository<DataAcces.Entities.WZ> WZRepository, IMapper mapper)
         {
             this.WZRepository = WZRepository;
+            this.mapper = mapper;
         }
         public Task<GetWZResponse> Handle(GetWZRequest request, CancellationToken cancellationToken)
         {
             var wzs = this.WZRepository.GetAll();
-            var domainWZs = wzs.Select(n => new Domain.Models.WZ()
-            {
-                Id = n.Id,
-                Number = n.Number,
-                Date = n.Date,
-                Items = n.Items
-
-            });
+            var mappedWZ = this.mapper.Map<List<Domain.Models.WZ>>(wzs);
 
             var response = new GetWZResponse()
             {
-                Data = domainWZs.ToList()
+                Data = mappedWZ.ToList()
             };
             return Task.FromResult(response);
         }

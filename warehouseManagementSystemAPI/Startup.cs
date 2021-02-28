@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
+using warehouseManagementSystem.ApplicationServices.Mappings;
 using warehouseManagementSystem.DataAcces;
 
 namespace warehouseManagementSystemAPI
@@ -30,6 +31,7 @@ namespace warehouseManagementSystemAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(ItemsProfile).Assembly);
             services.AddMediatR(typeof(ResponseBase<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddDbContext<WarehouseStorageContext>(opt => opt.UseSqlServer(this.Configuration.GetConnectionString("WarehouseDatabaseConnection")));
