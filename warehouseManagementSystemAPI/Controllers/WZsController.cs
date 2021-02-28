@@ -1,16 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 
 namespace warehouseManagementSystemAPI.Controllers
 {
-    public class WZsController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class WZsController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IMediator mediator;
+
+        public WZsController(IMediator mediator)
         {
-            return View();
+            this.mediator = mediator;
         }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetAllWZs([FromQuery] GetWZRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+
     }
 }
+
+
+
+    
