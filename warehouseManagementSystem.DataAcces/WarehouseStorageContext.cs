@@ -19,6 +19,7 @@ namespace warehouseManagementSystem.DataAcces
         public DbSet<WZ> WZs { get; set; }
         public DbSet<MM> MMs { get; set; }
         public DbSet<Place> Places { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
 
     }
 

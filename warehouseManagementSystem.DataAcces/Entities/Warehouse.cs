@@ -10,7 +10,5 @@ namespace warehouseManagementSystem.DataAcces.Entities
     {
         public string Name { get; set; }
         public List<Item> Items { get; set; }
-
-
     }
 }
