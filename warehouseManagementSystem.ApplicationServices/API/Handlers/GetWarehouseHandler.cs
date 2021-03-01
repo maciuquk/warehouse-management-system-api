@@ -22,16 +22,16 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
             this.WarehouseRepository = WarehouseRepository;
             this.mapper = mapper;
         }
-        public Task<GetWarehouseResponse> Handle(GetWarehouseRequest request, CancellationToken cancellationToken)
+        public async Task<GetWarehouseResponse> Handle(GetWarehouseRequest request, CancellationToken cancellationToken)
         {
-            var warehouses = this.WarehouseRepository.GetAll();
+            var warehouses = await this.WarehouseRepository.GetAll();
             var mappedWarehouses = this.mapper.Map<List<Domain.Models.Warehouse>>(warehouses);
 
             var response = new GetWarehouseResponse()
             {
-                Data = mappedWarehouses.ToList()
+                Data = mappedWarehouses
             };
-            return Task.FromResult(response);
+            return response;
         }
     }
 

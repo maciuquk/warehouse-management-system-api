@@ -14,23 +14,22 @@ namespace warehouseManagementSystem.DataAcces
         protected readonly WarehouseStorageContext context;
         private DbSet<T> entities;
 
-
         public Repository(WarehouseStorageContext context)
         {
             this.context = context;
             entities = context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        public Task<List<T>> GetAll()
         {
-            return entities.AsEnumerable();
+            return entities.ToListAsync();
         }
 
-        public T GetById(int id)
+        public Task<T> GetById(int id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return entities.SingleOrDefaultAsync(s => s.Id == id);
         }
 
-        public void Insert(T entity)
+        public Task Insert(T entity)
         {
             if (entity == null)
             {
@@ -38,24 +37,24 @@ namespace warehouseManagementSystem.DataAcces
             }
 
             entities.Add(entity);
-            context.SaveChanges();
+            return context.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public Task Update(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
 
-            context.SaveChanges();
+            return context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            T entity = entities.SingleOrDefault(s => s.Id == id);
+            T entity = await entities.SingleOrDefaultAsync(s => s.Id == id);
             entities.Remove(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

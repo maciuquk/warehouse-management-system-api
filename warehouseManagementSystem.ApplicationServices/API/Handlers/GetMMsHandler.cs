@@ -22,16 +22,16 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
             this.MMRepository = MMRepository;
             this.mapper = mapper;
         }
-        public Task<GetMMsResponse> Handle(GetMMsRequest request, CancellationToken cancellationToken)
+        public async Task<GetMMsResponse> Handle(GetMMsRequest request, CancellationToken cancellationToken)
         {
-            var MMs = this.MMRepository.GetAll();
+            var MMs = await this.MMRepository.GetAll();
             var mappedMMs = this.mapper.Map<List<Domain.Models.MM>>(MMs);
 
             var response = new GetMMsResponse()
             {
-                Data = mappedMMs.ToList()
+                Data = mappedMMs
             };
-            return Task.FromResult(response);
+            return response;
         }
 
     }

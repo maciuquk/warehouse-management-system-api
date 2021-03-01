@@ -24,16 +24,16 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
             this.WZRepository = WZRepository;
             this.mapper = mapper;
         }
-        public Task<GetWZResponse> Handle(GetWZRequest request, CancellationToken cancellationToken)
+        public async Task<GetWZResponse> Handle(GetWZRequest request, CancellationToken cancellationToken)
         {
-            var wzs = this.WZRepository.GetAll();
+            var wzs = await this.WZRepository.GetAll();
             var mappedWZ = this.mapper.Map<List<Domain.Models.WZ>>(wzs);
 
             var response = new GetWZResponse()
             {
-                Data = mappedWZ.ToList()
+                Data = mappedWZ
             };
-            return Task.FromResult(response);
+            return response;
         }
     }
 }

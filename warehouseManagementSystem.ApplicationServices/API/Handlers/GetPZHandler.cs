@@ -22,16 +22,16 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
             this.PZRepository = PZRepository;
             this.mapper = mapper;
         }
-        public Task<GetPZResponse> Handle(GetPZRequest request, CancellationToken cancellationToken)
+        public async Task<GetPZResponse> Handle(GetPZRequest request, CancellationToken cancellationToken)
         {
-            var pzs = this.PZRepository.GetAll();
+            var pzs = await this.PZRepository.GetAll();
             var mappedPZs = this.mapper.Map<List<Domain.Models.PZ>>(pzs);
 
             var response = new GetPZResponse()
             {
-                Data = mappedPZs.ToList()
+                Data = mappedPZs
             };
-            return Task.FromResult(response);
+            return response;
         }
     }
 }
