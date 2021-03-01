@@ -6,28 +6,32 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using warehouseManagementSystem.ApplicationServices.API.Domain;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using warehouseManagementSystem.DataAcces;
+using warehouseManagementSystem.DataAcces.CQRS.Querries;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class GetPZHandler : IRequestHandler<GetPZRequest, GetPZResponse>
+    public class GetPZHandler : IRequestHandler<GetPZsRequest, GetPZsResponse>
     {
-        private readonly IRepository<DataAcces.Entities.PZ> PZRepository;
         private readonly IMapper mapper;
+        private readonly IQuerryExecutor queryExecutor;
 
-        public GetPZHandler(IRepository<DataAcces.Entities.PZ> PZRepository, IMapper mapper)
+        public GetPZHandler(IMapper mapper, IQuerryExecutor queryExecutor)
         {
-            this.PZRepository = PZRepository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
-        public async Task<GetPZResponse> Handle(GetPZRequest request, CancellationToken cancellationToken)
+        public async Task<GetPZsResponse> Handle(GetPZsRequest request, CancellationToken cancellationToken)
         {
-            var pzs = await this.PZRepository.GetAll();
+            var query = new GetPZsQuery();
+            var pzs = await this.queryExecutor.Execute(query);
+
             var mappedPZs = this.mapper.Map<List<Domain.Models.PZ>>(pzs);
 
-            var response = new GetPZResponse()
+            var response = new GetPZsResponse()
             {
                 Data = mappedPZs
             };

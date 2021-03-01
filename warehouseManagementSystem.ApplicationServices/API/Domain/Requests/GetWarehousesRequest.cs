@@ -8,7 +8,7 @@ using warehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
-    public class GetPZRequest : IRequest<GetPZResponse>
+    public class GetWarehousesRequest : IRequest<GetWarehousesResponse>
     {
     }
 }

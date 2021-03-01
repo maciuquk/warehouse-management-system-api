@@ -9,29 +9,32 @@ using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using warehouseManagementSystem.DataAcces;
+using warehouseManagementSystem.DataAcces.CQRS.Querries;
 using warehouseManagementSystem.DataAcces.Entities;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Handlers
 {
 
-    public class GetWZHandler : IRequestHandler<GetWZRequest, GetWZResponse>
+    public class GetWZHandler : IRequestHandler<GetWZsRequest, GetWZsResponse>
     {
-        private readonly IRepository<DataAcces.Entities.WZ> WZRepository;
         private readonly IMapper mapper;
+        private readonly IQuerryExecutor queryExecutor;
 
-        public GetWZHandler(IRepository<DataAcces.Entities.WZ> WZRepository, IMapper mapper)
+        public GetWZHandler(IMapper mapper, IQuerryExecutor queryExecutor)
         {
-            this.WZRepository = WZRepository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
-        public async Task<GetWZResponse> Handle(GetWZRequest request, CancellationToken cancellationToken)
+        public async Task<GetWZsResponse> Handle(GetWZsRequest request, CancellationToken cancellationToken)
         {
-            var wzs = await this.WZRepository.GetAll();
-            var mappedWZ = this.mapper.Map<List<Domain.Models.WZ>>(wzs);
+            var query = new GetWZsQuery();
+            var wzs = await this.queryExecutor.Execute(query);
 
-            var response = new GetWZResponse()
+            var mappedWZs = this.mapper.Map<List<Domain.Models.WZ>>(wzs);
+
+            var response = new GetWZsResponse()
             {
-                Data = mappedWZ
+                Data = mappedWZs
             };
             return response;
         }

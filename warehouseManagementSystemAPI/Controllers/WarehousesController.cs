@@ -21,7 +21,7 @@ namespace warehouseManagementSystemAPI.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllWarehouses([FromQuery] GetWarehouseRequest request)
+        public async Task<IActionResult> GetAllWarehouses([FromQuery] GetWarehousesRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);

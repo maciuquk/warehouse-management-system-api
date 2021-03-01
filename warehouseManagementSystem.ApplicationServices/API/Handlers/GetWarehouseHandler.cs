@@ -9,25 +9,28 @@ using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using warehouseManagementSystem.DataAcces;
+using warehouseManagementSystem.DataAcces.CQRS.Querries;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class GetWarehouseHandler : IRequestHandler<GetWarehouseRequest, GetWarehouseResponse>
+    public class GetWarehouseHandler : IRequestHandler<GetWarehousesRequest, GetWarehousesResponse>
     {
-        private readonly IRepository<DataAcces.Entities.Warehouse> WarehouseRepository;
         private readonly IMapper mapper;
+        private readonly IQuerryExecutor queryExecutor;
 
-        public GetWarehouseHandler(IRepository<DataAcces.Entities.Warehouse> WarehouseRepository, IMapper mapper)
+        public GetWarehouseHandler(IMapper mapper, IQuerryExecutor queryExecutor)
         {
-            this.WarehouseRepository = WarehouseRepository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
-        public async Task<GetWarehouseResponse> Handle(GetWarehouseRequest request, CancellationToken cancellationToken)
+        public async Task<GetWarehousesResponse> Handle(GetWarehousesRequest request, CancellationToken cancellationToken)
         {
-            var warehouses = await this.WarehouseRepository.GetAll();
+            var query = new GetWarehousesQuery();
+            var warehouses = await this.queryExecutor.Execute(query);
+
             var mappedWarehouses = this.mapper.Map<List<Domain.Models.Warehouse>>(warehouses);
 
-            var response = new GetWarehouseResponse()
+            var response = new GetWarehousesResponse()
             {
                 Data = mappedWarehouses
             };

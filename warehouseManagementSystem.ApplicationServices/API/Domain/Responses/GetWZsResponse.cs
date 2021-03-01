@@ -7,7 +7,7 @@ using warehouseManagementSystem.ApplicationServices.API.Domain.Models;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Domain.Responses
 {
-    public class GetPZResponse : ResponseBase<List<PZ>>
+    public class GetWZsResponse : ResponseBase<List<WZ>>
     {
     }
 }

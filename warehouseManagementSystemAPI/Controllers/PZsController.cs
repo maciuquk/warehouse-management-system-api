@@ -21,7 +21,7 @@ namespace warehouseManagementSystemAPI.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllPZs([FromQuery] GetPZRequest request)
+        public async Task<IActionResult> GetAllPZs([FromQuery] GetPZsRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);

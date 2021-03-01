@@ -9,23 +9,26 @@ using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using warehouseManagementSystem.DataAcces;
+using warehouseManagementSystem.DataAcces.CQRS.Querries;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Handlers
 {
     public class GetMMsHandler : IRequestHandler<GetMMsRequest, GetMMsResponse>
     {
-        private readonly IRepository<DataAcces.Entities.MM> MMRepository;
         private readonly IMapper mapper;
+        private readonly IQuerryExecutor queryExecutor;
 
-        public GetMMsHandler(IRepository<DataAcces.Entities.MM> MMRepository, IMapper mapper)
+        public GetMMsHandler(IMapper mapper, IQuerryExecutor queryExecutor)
         {
-            this.MMRepository = MMRepository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
         public async Task<GetMMsResponse> Handle(GetMMsRequest request, CancellationToken cancellationToken)
         {
-            var MMs = await this.MMRepository.GetAll();
-            var mappedMMs = this.mapper.Map<List<Domain.Models.MM>>(MMs);
+            var query = new GetMMsQuery();
+            var mms = await this.queryExecutor.Execute(query);
+
+            var mappedMMs = this.mapper.Map<List<Domain.Models.MM>>(mms);
 
             var response = new GetMMsResponse()
             {
