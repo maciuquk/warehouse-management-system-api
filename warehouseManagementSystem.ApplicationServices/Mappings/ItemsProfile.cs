@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Models;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 
 namespace warehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -12,6 +13,9 @@ namespace warehouseManagementSystem.ApplicationServices.Mappings
     {
         public ItemsProfile()
         {
+            this.CreateMap<AddItemRequest, DataAcces.Entities.Item>()
+                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name));
+
             this.CreateMap<DataAcces.Entities.Item, Item>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))

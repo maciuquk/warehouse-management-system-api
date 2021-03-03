@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
 using warehouseManagementSystem.ApplicationServices.Mappings;
 using warehouseManagementSystem.DataAcces;
+using warehouseManagementSystem.DataAcces.CQRS;
 
 namespace warehouseManagementSystemAPI
 {
@@ -32,6 +33,7 @@ namespace warehouseManagementSystemAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IQuerryExecutor, QueryExecutor>();
+            services.AddTransient<ICommandExecutor, CommandExecutor>();
             services.AddAutoMapper(typeof(ItemsProfile).Assembly);
             services.AddMediatR(typeof(ResponseBase<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
