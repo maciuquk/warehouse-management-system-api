@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Add;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get.ById;
 
 namespace warehouseManagementSystemAPI.Controllers
 {
@@ -24,6 +25,19 @@ namespace warehouseManagementSystemAPI.Controllers
         [Route("")]
         public async Task<IActionResult> GetAllWarehouses([FromQuery] GetWarehousesRequest request)
         {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{warehouseId}")]
+        public async Task<IActionResult> GetById([FromRoute] int warehouseId)
+        {
+            var request = new GetWarehouseByIdRequest()
+            {
+                WarehouseId = warehouseId
+            };
+
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }

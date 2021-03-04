@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Add;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get.ById;
 
 namespace warehouseManagementSystemAPI.Controllers
 {
@@ -22,6 +23,19 @@ namespace warehouseManagementSystemAPI.Controllers
 
         [HttpGet]
         [Route("")]
+        public async Task<IActionResult> GetById([FromRoute] int wzId)
+        {
+            var request = new GetWZByIdRequest()
+            {
+                WZId = wzId
+            };
+
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{wzId}")]
         public async Task<IActionResult> GetAllWZs([FromQuery] GetWZsRequest request)
         {
             var response = await this.mediator.Send(request);
