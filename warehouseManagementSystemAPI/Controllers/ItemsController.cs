@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delete;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get;
 using warehouseManagementSystem.DataAcces;
 using warehouseManagementSystem.DataAcces.Entities;
@@ -67,6 +68,13 @@ namespace warehouseManagementSystemAPI.Controllers
             return this.Ok(response);
         }
 
+        [HttpDelete]
+        [Route("")]
+        public async Task<IActionResult> RemoveItem([FromBody] DeleteItemRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
 
     }
 }

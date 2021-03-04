@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Add;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delete;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get.ById;
 
 namespace warehouseManagementSystemAPI.Controllers
@@ -45,6 +46,14 @@ namespace warehouseManagementSystemAPI.Controllers
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> AddWarehouse([FromBody] AddWarehouseRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("")]
+        public async Task<IActionResult> DeleteWarehouse([FromBody] DeleteWarehouseRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);
