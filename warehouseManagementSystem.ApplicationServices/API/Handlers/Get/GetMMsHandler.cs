@@ -25,7 +25,10 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         }
         public async Task<GetMMsResponse> Handle(GetMMsRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetMMsQuery();
+            var query = new GetMMsQuery()
+            {
+                Number = request.Number
+            }; 
             var mms = await this.queryExecutor.Execute(query);
 
             var mappedMMs = this.mapper.Map<List<Domain.Models.MM>>(mms);

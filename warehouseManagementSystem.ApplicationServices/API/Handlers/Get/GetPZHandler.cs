@@ -26,7 +26,10 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         }
         public async Task<GetPZsResponse> Handle(GetPZsRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetPZsQuery();
+            var query = new GetPZsQuery()
+            {
+                Number = request.Number
+            };
             var pzs = await this.queryExecutor.Execute(query);
 
             var mappedPZs = this.mapper.Map<List<Domain.Models.PZ>>(pzs);

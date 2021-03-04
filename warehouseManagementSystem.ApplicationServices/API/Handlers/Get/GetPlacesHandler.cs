@@ -24,7 +24,10 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         }
         public async Task<GetPlacesResponse> Handle(GetPlacesRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetPlacesQuery();
+            var query = new GetPlacesQuery()
+            {
+                PositionX = request.PositionX
+            };
             var places = await this.queryExecutor.Execute(query);
 
             var mappedPlaces = this.mapper.Map<List<Domain.Models.Place>>(places);

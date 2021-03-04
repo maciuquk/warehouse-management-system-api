@@ -14,7 +14,7 @@ namespace warehouseManagementSystem.DataAcces.CQRS.Querries
 
         public override Task<List<Warehouse>> Execute(WarehouseStorageContext context)
         {
-            if (this.Name.Any())
+            if (this.Name != null)
             {
                 return context.Warehouses.Where(x => x.Name == this.Name).ToListAsync();
             }

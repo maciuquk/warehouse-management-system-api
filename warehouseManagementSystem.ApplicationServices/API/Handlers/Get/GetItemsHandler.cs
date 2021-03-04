@@ -24,7 +24,10 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         }
         public async Task<GetItemsResponse> Handle(GetItemsRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetItemsQuerry();
+            var query = new GetItemsQuerry()
+            {
+                Name = request.Name
+            };
             var items = await this.queryExecutor.Execute(query);
             
             var mappedItems = this.mapper.Map<List<Domain.Models.Item>>(items);

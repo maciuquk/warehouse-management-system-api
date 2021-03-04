@@ -14,7 +14,7 @@ namespace warehouseManagementSystem.DataAcces.CQRS.Querries
 
         public override Task<List<PZ>> Execute(WarehouseStorageContext context)
         {
-            if (this.Number.Any())
+            if (this.Number != null)
             {
                 return context.PZs.Where(x => x.Number == this.Number).ToListAsync();
             }

@@ -27,7 +27,10 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         }
         public async Task<GetWZsResponse> Handle(GetWZsRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetWZsQuery();
+            var query = new GetWZsQuery()
+            {
+                Number = request.Number
+            };
             var wzs = await this.queryExecutor.Execute(query);
 
             var mappedWZs = this.mapper.Map<List<Domain.Models.WZ>>(wzs);
