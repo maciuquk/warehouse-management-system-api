@@ -10,9 +10,19 @@ namespace warehouseManagementSystem.DataAcces.CQRS.Querries
 {
     public class GetItemsQuerry : QueryBase<List<Item>>
     {
+        public string Name { get; set; }
+
         public override Task<List<Item>> Execute(WarehouseStorageContext context)
         {
-            return context.Items.ToListAsync();
+            if (this.Name.Any())
+            {
+                return context.Items.Where(x => x.Name == this.Name).ToListAsync();
+
+            }
+            else
+            {
+                return context.Items.ToListAsync();
+            }
         }
 
 

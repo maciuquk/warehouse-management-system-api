@@ -10,10 +10,20 @@ namespace warehouseManagementSystem.DataAcces.CQRS.Querries
 {
     public class GetWZsQuery : QueryBase<List<WZ>>
     {
+        public string Number { get; set; }
+
         public override Task<List<WZ>> Execute(WarehouseStorageContext context)
         {
-            return context.WZs.ToListAsync();
+            if (this.Number.Any())
+            {
+                return context.WZs.Where(x => x.Number == this.Number).ToListAsync();
 
+            }
+            else
+            {
+                return context.WZs.ToListAsync();
+
+            }
         }
     }
 }

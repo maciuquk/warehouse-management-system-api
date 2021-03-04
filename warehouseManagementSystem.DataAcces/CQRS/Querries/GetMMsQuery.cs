@@ -10,9 +10,19 @@ namespace warehouseManagementSystem.DataAcces.CQRS.Querries
 {
     public class GetMMsQuery : QueryBase<List<MM>>
     {
+        public string Number { get; set; }
+
         public override Task<List<MM>> Execute(WarehouseStorageContext context)
         {
-            return context.MMs.ToListAsync();
+            if (this.Number.Any())
+            {
+                return context.MMs.Where(x => x.Number == this.Number).ToListAsync();
+
+            }
+            else
+            {
+                return context.MMs.ToListAsync();
+            }
         }
     }
 }

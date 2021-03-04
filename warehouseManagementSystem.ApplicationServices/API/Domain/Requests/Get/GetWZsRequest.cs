@@ -10,5 +10,7 @@ namespace warehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
     public class GetWZsRequest : IRequest<GetWZsResponse>
     {
+        public string Number { get; set; }
+
     }
 }
