@@ -38,7 +38,6 @@ namespace warehouseManagementSystemAPI.Controllers
             this.mediator = mediator;
         }
 
-
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetAllItems([FromQuery] GetItemsRequest request)
@@ -67,5 +66,7 @@ namespace warehouseManagementSystemAPI.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+
     }
 }
