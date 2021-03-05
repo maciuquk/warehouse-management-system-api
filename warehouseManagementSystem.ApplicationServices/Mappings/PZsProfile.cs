@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Add;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delete;

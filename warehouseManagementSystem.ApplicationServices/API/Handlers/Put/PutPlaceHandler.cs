@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Put;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Responses.Put;
 using warehouseManagementSystem.DataAcces.CQRS;
-using warehouseManagementSystem.DataAcces.CQRS.Commands;
 using warehouseManagementSystem.DataAcces.CQRS.Commands.Put;
 using warehouseManagementSystem.DataAcces.Entities;
 

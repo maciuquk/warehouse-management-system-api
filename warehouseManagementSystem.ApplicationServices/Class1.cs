@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace warehouseManagementSystem.ApplicationServices
+﻿namespace warehouseManagementSystem.ApplicationServices
 {
     public class Class1
     {

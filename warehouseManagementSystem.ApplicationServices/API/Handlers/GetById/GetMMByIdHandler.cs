@@ -2,7 +2,6 @@
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get.ById;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Responses.ById;
 using warehouseManagementSystem.DataAcces;

@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using warehouseManagementSystem.DataAcces;
 using warehouseManagementSystem.DataAcces.CQRS.Querries;
-using warehouseManagementSystem.DataAcces.Entities;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Handlers
 {
