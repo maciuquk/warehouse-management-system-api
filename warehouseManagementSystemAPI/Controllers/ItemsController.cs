@@ -1,15 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delete;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get;
-using warehouseManagementSystem.DataAcces;
-using warehouseManagementSystem.DataAcces.Entities;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Put;
 
 namespace warehouseManagementSystemAPI.Controllers
 {
@@ -17,21 +13,6 @@ namespace warehouseManagementSystemAPI.Controllers
     [Route("[controller]")]
     public class ItemsController : ControllerBase
     {
-        //private readonly IRepository<Item> itemRepository;
-
-        //public ItemsController(IRepository<Item> itemRepository)
-        //{
-        //    this.itemRepository = itemRepository;
-        //}
-
-        //[HttpGet]
-        //[Route("")]
-        //public IEnumerable<Item> GetAllItems() => this.itemRepository.GetAll();
-
-        //[HttpGet]
-        //[Route("{itemId}")]
-        //public Item GetItemById(int itemId) => this.itemRepository.GetById(itemId);
-
         private readonly IMediator mediator;
 
         public ItemsController(IMediator mediator)
@@ -76,5 +57,12 @@ namespace warehouseManagementSystemAPI.Controllers
             return this.Ok(response);
         }
 
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> PutItem([FromBody] PutItemRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
     }
 }

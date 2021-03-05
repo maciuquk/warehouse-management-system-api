@@ -1,13 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Add;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delete;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get.ById;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Put;
 
 namespace warehouseManagementSystemAPI.Controllers
 {
@@ -57,5 +55,14 @@ namespace warehouseManagementSystemAPI.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> PutPlace([FromBody] PutPlaceRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
     }
 }

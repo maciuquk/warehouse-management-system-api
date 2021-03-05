@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delete;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Put;
 
 namespace warehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -19,6 +20,12 @@ namespace warehouseManagementSystem.ApplicationServices.Mappings
             
             this.CreateMap<DeleteItemRequest, DataAcces.Entities.Item>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
+
+            this.CreateMap<PutItemRequest, DataAcces.Entities.Item>()
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
+                .ForMember(x => x.Quantity, y => y.MapFrom(z => z.Quantity))
+                .ForMember(x => x.PhotoUrl, y => y.MapFrom(z => z.PhotoUrl));
 
             this.CreateMap<DataAcces.Entities.Item, Item>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
