@@ -47,21 +47,26 @@ namespace warehouseManagementSystemAPI.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
-
-        [HttpDelete]
-        [Route("")]
-        public async Task<IActionResult> DeleteMM([FromBody] DeleteMMRequest request)
-        {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
-        }
-
+               
         [HttpPut]
         [Route("")]
         public async Task<IActionResult> PutMM([FromBody] PutMMRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{mmId}")]
+        public async Task<IActionResult> DeleteMM([FromRoute] int mmId)
+        {
+            var idRequest = new DeleteMMRequest()
+            {
+                Id = mmId
+            };
+            var idResponse = await this.mediator.Send(idRequest);
+            return this.Ok();
+
         }
     }
 

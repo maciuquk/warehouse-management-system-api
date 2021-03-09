@@ -12,9 +12,10 @@ namespace warehouseManagementSystem.ApplicationServices.Mappings
         {
             this.CreateMap<AddItemRequest, DataAcces.Entities.Item>()
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name));
-            
+
             this.CreateMap<DeleteItemRequest, DataAcces.Entities.Item>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
+                
 
             this.CreateMap<PutItemRequest, DataAcces.Entities.Item>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))

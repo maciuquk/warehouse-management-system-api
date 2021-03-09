@@ -50,19 +50,16 @@ namespace warehouseManagementSystemAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("")]
-        public async Task<IActionResult> RemoveItem([FromBody] DeleteItemRequest request)
+        [Route("{itemId}")]
+        public async Task<IActionResult> DeleteItem([FromRoute] int itemId)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
-        }
-
-        [HttpPut]
-        [Route("")]
-        public async Task<IActionResult> PutItem([FromBody] PutItemRequest request)
-        {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            var idRequest = new DeleteItemRequest()
+            {
+                Id = itemId
+            };
+            var idResponse = await this.mediator.Send(idRequest);
+            return this.Ok();
+            
         }
     }
 }

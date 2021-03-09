@@ -48,20 +48,25 @@ namespace warehouseManagementSystemAPI.Controllers
             return this.Ok(response);
         }
 
-        [HttpDelete]
-        [Route("")]
-        public async Task<IActionResult> DeletePZ([FromBody] DeletePZRequest request)
-        {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
-        }
-
         [HttpPut]
         [Route("")]
         public async Task<IActionResult> PutPZ([FromBody] PutPZRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{pzId}")]
+        public async Task<IActionResult> DeletePZ([FromRoute] int pzId)
+        {
+            var idRequest = new DeleteItemRequest()
+            {
+                Id = pzId
+            };
+            var idResponse = await this.mediator.Send(idRequest);
+            return this.Ok();
+
         }
     }
 }
