@@ -61,5 +61,22 @@ namespace warehouseManagementSystemAPI.Controllers
             return this.Ok();
             
         }
+        
+        [HttpPut]
+        [Route("{itemId}")]
+        public async Task<IActionResult> PutItem([FromRoute] int itemId, [FromBody] PutItemRequest request)
+        {
+            var idRequest = new PutItemRequest()
+            {
+                Id = itemId
+            };
+            var idResponse = await this.mediator.Send(idRequest);
+
+            // jak to połączyć?
+
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+
+        }
     }
 }
