@@ -49,14 +49,6 @@ namespace warehouseManagementSystemAPI.Controllers
             return this.Ok(response);
         }
 
-        [HttpPut]
-        [Route("")]
-        public async Task<IActionResult> PutWarehouse([FromBody] PutWarehouseRequest request)
-        {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
-        }
-
         [HttpDelete]
         [Route("{warehouseId}")]
         public async Task<IActionResult> DeleteWarehouse([FromRoute] int warehouseId)
@@ -68,6 +60,14 @@ namespace warehouseManagementSystemAPI.Controllers
             var idResponse = await this.mediator.Send(idRequest);
             return this.Ok();
 
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> PutWarehouse([FromBody] PutWarehouseRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
         }
     }
 }

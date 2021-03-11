@@ -48,14 +48,6 @@ namespace warehouseManagementSystemAPI.Controllers
             return this.Ok(response);
         }
 
-        [HttpPut]
-        [Route("")]
-        public async Task<IActionResult> PutPlace([FromBody] PutPlaceRequest request)
-        {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
-        }
-
         [HttpDelete]
         [Route("{placeId}")]
         public async Task<IActionResult> DeletePlace([FromRoute] int placeId)
@@ -67,6 +59,14 @@ namespace warehouseManagementSystemAPI.Controllers
             var idResponse = await this.mediator.Send(idRequest);
             return this.Ok();
 
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> PutPlace([FromBody] PutPlaceRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
         }
 
     }
