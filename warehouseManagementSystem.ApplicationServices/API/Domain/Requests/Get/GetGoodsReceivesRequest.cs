@@ -3,8 +3,9 @@ using warehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace warehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
-    public class GetWarehousesRequest : IRequest<GetWarehousesResponse>
+    public class GetGoodsReceivesRequest : IRequest<GetGoodsReceivesResponse>
     {
-        public string Name { get; set; }
+        public string Number { get; set; }
+
     }
 }

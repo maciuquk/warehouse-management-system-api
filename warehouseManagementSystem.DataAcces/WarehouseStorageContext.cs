@@ -10,9 +10,9 @@ namespace warehouseManagementSystem.DataAcces
         }
 
         public DbSet<Item> Items { get; set; }
-        public DbSet<PZ> PZs { get; set; }
-        public DbSet<WZ> WZs { get; set; }
-        public DbSet<MM> MMs { get; set; }
+        public DbSet<GoodsReceive> GoodsReceiveds { get; set; }
+        public DbSet<GoodsIssued> GoodsIssueds { get; set; }
+        public DbSet<InterBranchTransfer> InterBranchTransfers { get; set; }
         public DbSet<Place> Places { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
 

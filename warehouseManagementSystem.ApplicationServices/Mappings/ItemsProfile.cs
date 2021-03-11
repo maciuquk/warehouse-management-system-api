@@ -28,9 +28,9 @@ namespace warehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.Quantity, y => y.MapFrom(z => z.Quantity))
                 .ForMember(x => x.PhotoUrl, y => y.MapFrom(z => z.PhotoUrl))
-                .ForMember(x => x.PZs, y => y.MapFrom(z => z.PZs))
-                .ForMember(x => x.WZs, y => y.MapFrom(z => z.WZs))
-                .ForMember(x => x.MMs, y => y.MapFrom(z => z.MMs))
+                .ForMember(x => x.GoodsReceives, y => y.MapFrom(z => z.GoodsReceives))
+                .ForMember(x => x.GoodsIssueds, y => y.MapFrom(z => z.GoodsIssueds))
+                .ForMember(x => x.InterBranchTransfers, y => y.MapFrom(z => z.InterBranchTransfers))
                 .ForMember(x => x.Places, y => y.MapFrom(z => z.Places))
                 .ForMember(x => x.Warehouses, y => y.MapFrom(z => z.Warehouses));
         }
