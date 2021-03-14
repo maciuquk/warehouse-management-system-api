@@ -24,7 +24,6 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         {
             var query = new GetGoodsReceivesQuery()
             {
-                Number = request.Number
             };
             var goodsReceives = await this.queryExecutor.Execute(query);
 

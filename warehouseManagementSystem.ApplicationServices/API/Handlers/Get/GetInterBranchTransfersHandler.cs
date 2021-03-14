@@ -23,7 +23,6 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         {
             var query = new GetInterBranchTransfersQuery()
             {
-                Number = request.Number
             }; 
             var interBranchTransfers = await this.queryExecutor.Execute(query);
 

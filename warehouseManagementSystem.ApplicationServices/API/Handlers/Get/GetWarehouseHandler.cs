@@ -24,7 +24,6 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         {
             var query = new GetWarehousesQuery()
             {
-                Name = request.Name
             };
             var warehouses = await this.queryExecutor.Execute(query);
 

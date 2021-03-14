@@ -1,12 +1,15 @@
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouseManagementSystem.ApplicationServices.API.Domain;
+using warehouseManagementSystem.ApplicationServices.API.Validators;
 using warehouseManagementSystem.ApplicationServices.Mappings;
 using warehouseManagementSystem.DataAcces;
 using warehouseManagementSystem.DataAcces.CQRS;
@@ -25,6 +28,13 @@ namespace warehouseManagementSystemAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvcCore()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddItemValidator>());
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            }); 
+
             services.AddTransient<IQuerryExecutor, QueryExecutor>();
             services.AddTransient<ICommandExecutor, CommandExecutor>();
             services.AddAutoMapper(typeof(ItemsProfile).Assembly);

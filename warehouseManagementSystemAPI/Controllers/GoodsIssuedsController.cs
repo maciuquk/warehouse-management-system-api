@@ -6,47 +6,44 @@ using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Add;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delete;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Get.ById;
 using warehouseManagementSystem.ApplicationServices.API.Domain.Requests.Put;
+using warehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace warehouseManagementSystemAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GoodsIssuedsController : ControllerBase
+    public class GoodsIssuedsController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public GoodsIssuedsController(IMediator mediator)
+        public GoodsIssuedsController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
+
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetById([FromRoute] int goodsIssuedId)
+        public Task<IActionResult> GoodsIssueds([FromQuery] GetGoodsIssuedsRequest request)
+        {
+            return this.HandleRequest<GetGoodsIssuedsRequest, GetGoodsIssuedsResponse>(request);
+        }
+
+        [HttpGet]
+        [Route("{itemId}")]
+        public async Task<IActionResult> GetById([FromRoute] int GoodsIssuedId)
         {
             var request = new GetGoodsIssuedByIdRequest()
             {
-                GoodsIssuedId = goodsIssuedId
+                GoodsIssuedId = GoodsIssuedId
             };
 
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
 
-        [HttpGet]
-        [Route("{wzId}")]
-        public async Task<IActionResult> GetAllGoodsIssueds([FromQuery] GetGoodsIssuedsRequest request)
-        {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
-        }
-
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddGoodsIssued([FromBody] AddGoodsIssuedRequest request)
+        public Task<IActionResult> AddGoodsIssued([FromBody] AddGoodsIssuedRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<AddGoodsIssuedRequest, AddGoodsIssuedResponse>(request);
         }
 
         [HttpDelete]

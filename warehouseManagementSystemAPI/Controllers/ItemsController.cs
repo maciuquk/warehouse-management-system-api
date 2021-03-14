@@ -11,21 +11,17 @@ namespace warehouseManagementSystemAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ItemsController : ControllerBase
+    public class ItemsController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ItemsController(IMediator mediator)
+        public ItemsController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllItems([FromQuery] GetItemsRequest request)
+        public Task<IActionResult> GetAllItems([FromQuery] GetItemsRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetItemsRequest, GetItemsResponse>(request);
         }
 
         [HttpGet]
@@ -43,10 +39,9 @@ namespace warehouseManagementSystemAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddItem([FromBody] AddItemRequest request)
+        public Task<IActionResult> AddItem([FromBody] AddItemRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<AddItemRequest, AddItemResponse>(request);
         }
 
         [HttpDelete]

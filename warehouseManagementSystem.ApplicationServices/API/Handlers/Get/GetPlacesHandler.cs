@@ -23,7 +23,6 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         {
             var query = new GetPlacesQuery()
             {
-                PositionX = request.PositionX
             };
             var places = await this.queryExecutor.Execute(query);
 

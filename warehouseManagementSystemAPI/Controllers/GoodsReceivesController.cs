@@ -11,13 +11,11 @@ namespace warehouseManagementSystemAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GoodsReceivesController : ControllerBase
+    public class GoodsReceivesController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public GoodsReceivesController(IMediator mediator)
+        public GoodsReceivesController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
+
         }
 
         [HttpGet]
@@ -42,10 +40,9 @@ namespace warehouseManagementSystemAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddGoodsReceive([FromBody] AddGoodsReceiveRequest request)
+        public Task<IActionResult> AddGoodsReceive([FromBody] AddGoodsReceiveRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<AddGoodsReceiveRequest, AddGoodsReceiveResponse>(request);
         }
 
         [HttpDelete]

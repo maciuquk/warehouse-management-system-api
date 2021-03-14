@@ -11,13 +11,11 @@ namespace warehouseManagementSystemAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class InterBranchTransfersController : ControllerBase
+    public class InterBranchTransfersController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public InterBranchTransfersController(IMediator mediator)
+        public InterBranchTransfersController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
+
         }
 
         [HttpGet]
@@ -42,12 +40,11 @@ namespace warehouseManagementSystemAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddInterBranchTransfer([FromBody] AddInterBranchTransferRequest request)
+        public Task<IActionResult> AddInterBranchTransfer([FromBody] AddInterBranchTransferRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<AddInterBranchTransferRequest, AddInterBranchTransferResponse>(request);
         }
-               
+
         [HttpDelete]
         [Route("{mmId}")]
         public async Task<IActionResult> DeleteInterBranchTransfer([FromRoute] int interBranchTransferId)

@@ -23,7 +23,7 @@ namespace warehouseManagementSystem.ApplicationServices.API.Handlers
         {
             var query = new GetItemsQuerry()
             {
-                Name = request.Name
+
             };
             var items = await this.queryExecutor.Execute(query);
             
